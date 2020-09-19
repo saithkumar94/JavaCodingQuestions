@@ -1,6 +1,9 @@
+/* 
+BattleShipGame between Player1 and Player2 where, Player2 guesses Battleship of player1 in a 6x6 matrix
+*/
 import java.util.*;
 
-class Main {
+class BattleShipGame {
   
 
   public static char guessboard[][] = new char[6][6];
@@ -9,6 +12,7 @@ class Main {
   public static int[] battle_start_arr = new int[2];
   public static int[] battle_end_arr = new int[2];
   public static int guesses = 10;
+  public static int count =0;
   
 
   public static void play(){
@@ -31,6 +35,7 @@ class Main {
     for(int i=start_arr[0];i<=end_arr[0];i++){
       for(int j=start_arr[1];j<=end_arr[1];j++){
           battleboard[i][j] = 'X';
+          count++;
       }
     }
 
@@ -56,10 +61,9 @@ class Main {
       row = guess_arr[0];
       col = guess_arr[1];
 
-      guessboard[row][col] = 'X';
-      showboard(guessboard);
-
+      guessboard[row][col] = 'O';
       flag = guessboardcheck();
+      showboard(guessboard);
 
       if(flag == true){
         System.out.println("Congrats you found the battleship");
@@ -75,14 +79,20 @@ class Main {
 
   public static boolean guessboardcheck(){
     boolean flag = false;
+    int match_count= 0;
     for(int i=battle_start_arr[0];i<=battle_end_arr[0];i++){
       for(int j=battle_start_arr[1];j<=battle_end_arr[1];j++){
-          if(guessboard[i][j] == battleboard[i][j])
-            flag = true; 
-          else
-            flag = false;
+          if(guessboard[i][j] != '.'){
+            guessboard[i][j] = 'X';
+          }
+          
+          if(guessboard[i][j] == battleboard[i][j]){
+            match_count++;
+          } 
       }
     }
+    if(match_count == count)
+      return true;
     return flag;
   }
 

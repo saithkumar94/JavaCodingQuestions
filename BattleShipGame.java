@@ -1,6 +1,6 @@
 import java.util.*;
 
-class BattleShipGame {
+class Main {
   
 
   public static char guessboard[][] = new char[6][6];
@@ -46,7 +46,8 @@ class BattleShipGame {
     boolean flag = false;
     int row,col;
 
-    if(guesses < 10){
+    while(guesses <= 10 && guesses > 0){
+      System.out.println("No of guesses left :" + guesses);
       System.out.println("Enter your guess :");
       String guess = sc.nextLine();
 
@@ -55,7 +56,8 @@ class BattleShipGame {
       row = guess_arr[0];
       col = guess_arr[1];
 
-      guessboard[row][col] = 'O';
+      guessboard[row][col] = 'X';
+      showboard(guessboard);
 
       flag = guessboardcheck();
 
